@@ -12,7 +12,6 @@
     "deploy": "mbt build && cf deploy mta_archives/time-registration_1.0.0.mtar"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.80.0",
     "@sap-cloud-sdk/http-client": "^3",
     "@sap/cds": "^8",
     "@sap/xssec": "^4",
