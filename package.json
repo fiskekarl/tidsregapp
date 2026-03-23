@@ -2,38 +2,54 @@
   "name": "time-registration",
   "version": "1.0.0",
   "description": "SAP BTP Kiosk Tidsregistrering for produktionsmedarbejdere",
-  "engines": { "node": ">=18" },
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
-    "start":   "cds-serve",
-    "watch":   "cds watch",
-    "build":   "cds build --production",
-    "deploy":  "mbt build && cf deploy mta_archives/time-registration_1.0.0.mtar"
+    "start": "cds-serve",
+    "watch": "cds watch",
+    "build": "cds build --production",
+    "deploy": "mbt build && cf deploy mta_archives/time-registration_1.0.0.mtar"
   },
   "dependencies": {
-    "@sap/cds":        "^8",
-    "@sap/xssec":      "^4",
-    "passport":        "^0.7",
+    "@anthropic-ai/sdk": "^0.80.0",
     "@sap-cloud-sdk/http-client": "^3",
-    "express":         "^4"
+    "@sap/cds": "^8",
+    "@sap/xssec": "^4",
+    "express": "^4",
+    "passport": "^0.7"
   },
   "devDependencies": {
     "@sap/cds-dk": "^8",
-    "sqlite3":     "^5"
+    "sqlite3": "^5"
   },
   "cds": {
     "requires": {
       "db": {
         "kind": "hana-cloud",
-        "[development]": { "kind": "sqlite", "credentials": { "database": ":memory:" } }
+        "[development]": {
+          "kind": "sqlite",
+          "credentials": {
+            "database": ":memory:"
+          }
+        }
       },
-      "uaa": { "kind": "xsuaa" },
+      "uaa": {
+        "kind": "xsuaa"
+      },
       "s4": {
         "kind": "odata",
         "model": "srv/external/CATS_API",
-        "[development]": { "kind": "odata-v2-mock" }
+        "[development]": {
+          "kind": "odata-v2-mock"
+        }
       },
-      "destinations": { "kind": "destinations" }
+      "destinations": {
+        "kind": "destinations"
+      }
     },
-    "features": { "assert_integrity": "db" }
+    "features": {
+      "assert_integrity": "db"
+    }
   }
 }
