@@ -1,0 +1,132 @@
+<mvc:View
+  controllerName="com.timeregistration.kiosk.controller.TimeEntry"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:l="sap.ui.layout"
+  displayBlock="true">
+
+  <Page showHeader="false" backgroundDesign="Transparent">
+
+    <customHeader>
+      <Bar>
+        <contentLeft>
+          <Avatar src="sap-icon://employee" displaySize="S" class="sapUiSmallMarginEnd" />
+          <Title text="{session>/fullName}" level="H4" />
+          <Text text=" · {session>/employeeID}" class="sapUiSmallMarginBegin" />
+        </contentLeft>
+        <contentRight>
+          <Text id="countdownText" text="" class="kioskCountdown sapUiSmallMarginEnd" />
+          <Button
+            text="{i18n>logoutButton}"
+            type="Reject"
+            icon="sap-icon://log"
+            press=".onManualLogout" />
+        </contentRight>
+      </Bar>
+    </customHeader>
+
+    <content>
+      <VBox width="100%" class="sapUiResponsiveMargin">
+
+        <!-- Registreringstype -->
+        <Title
+          text="{i18n>selectEntryType}"
+          level="H3"
+          class="sapUiMediumMarginTop sapUiSmallMarginBottom"
+          textAlign="Center"
+          width="100%" />
+
+        <FlexBox justifyContent="Center" width="100%" class="sapUiSmallMarginBottom">
+          <SegmentedButton
+            id="entryTypeBtn"
+            selectionChange=".onEntryTypeChange">
+            <items>
+              <SegmentedButtonItem key="CLOCKINOUT" icon="sap-icon://timesheet"   text="{i18n>typeClockInOut}" />
+              <SegmentedButtonItem key="ORDER"      icon="sap-icon://production"  text="{i18n>typeOrder}"      />
+              <SegmentedButtonItem key="COSTCENTER" icon="sap-icon://cost-center" text="{i18n>typeCostCenter}" />
+            </items>
+          </SegmentedButton>
+        </FlexBox>
+
+        <!-- Ordrenummer -->
+        <VBox id="orderPanel" visible="false" class="sapUiSmallMarginBottom sapUiSmallMarginBeginEnd">
+          <Label text="{i18n>orderNumberLabel}" required="true" />
+          <Input id="orderInput" placeholder="{i18n>orderNumberPlaceholder}"
+                 width="20rem" maxLength="12" submit=".onStartEntry" />
+        </VBox>
+
+        <!-- Koststed -->
+        <VBox id="costCenterPanel" visible="false" class="sapUiSmallMarginBottom sapUiSmallMarginBeginEnd">
+          <Label text="{i18n>costCenterLabel}" required="true" />
+          <Input id="costCenterInput" placeholder="{i18n>costCenterPlaceholder}"
+                 width="20rem" maxLength="10" submit=".onStartEntry" />
+        </VBox>
+
+        <!-- Start / Stop -->
+        <FlexBox justifyContent="Center" width="100%" class="sapUiMediumMarginTopBottom">
+          <Button
+            id="startBtn"
+            text="{i18n>startButton}"
+            type="Emphasized"
+            icon="sap-icon://begin"
+            press=".onStartEntry"
+            enabled="{= !${session>/running} }"
+            class="kioskActionBtn sapUiSmallMarginEnd" />
+          <Button
+            id="stopBtn"
+            text="{i18n>stopButton}"
+            type="Reject"
+            icon="sap-icon://stop"
+            press=".onStopEntry"
+            enabled="{session>/running}"
+            class="kioskActionBtn" />
+        </FlexBox>
+
+        <!-- Kørende registrering -->
+        <Panel
+          id="runningPanel"
+          visible="{session>/running}"
+          headerText="{i18n>runningHeader}"
+          class="kioskRunningPanel sapUiMediumMarginBottom">
+          <content>
+            <VBox class="sapUiSmallMargin">
+              <Text text="{i18n>startedAt}: {session>/startTime}" />
+              <Title id="elapsedTimer" text="00:00:00" level="H2" class="kioskElapsed" />
+            </VBox>
+          </content>
+        </Panel>
+
+        <!-- Dagens registreringer -->
+        <Title text="{i18n>todaysEntries}" level="H4"
+               class="sapUiSmallMarginBottom" width="100%" textAlign="Center" />
+        <List id="entryList" noDataText="{i18n>noEntries}" width="100%"
+              items="{entries>/}">
+          <items>
+            <StandardListItem
+              title="{EntryType} — {OrderNumber}{CostCenterNo}"
+              description="{StartTime} → {EndTime}  ({DurationMin} min)"
+              icon="sap-icon://timesheet"
+              info="{S4Status}" />
+          </items>
+        </List>
+
+        <!-- Fejlbesked -->
+        <MessageStrip
+          id="errorStrip" text="" type="Error"
+          showIcon="true" visible="false"
+          class="sapUiSmallMarginTopBottom" />
+
+      </VBox>
+    </content>
+
+    <footer>
+      <Bar>
+        <contentMiddle>
+          <Text text="{i18n>autoLogoutInfo}" class="kioskFooterText" />
+        </contentMiddle>
+      </Bar>
+    </footer>
+
+  </Page>
+
+</mvc:View>

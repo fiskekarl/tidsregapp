@@ -1,0 +1,8 @@
+node_modules/
+gen/
+mta_archives/
+*.mtar
+.env
+.cds-services.json
+default-env.json
+default-services.json

@@ -1,0 +1,47 @@
+{
+  "xsappname":   "time-registration",
+  "tenant-mode": "dedicated",
+  "description": "SAP BTP Tidsregistrering — XSUAA security descriptor",
+  "scopes": [
+    {
+      "name":        "$XSAPPNAME.TimeUser",
+      "description": "Kan logge ind og registrere tid (produktionsmedarbejder)"
+    },
+    {
+      "name":        "$XSAPPNAME.TimeAdmin",
+      "description": "Kan administrere medarbejdere og se alle registreringer"
+    }
+  ],
+  "role-templates": [
+    {
+      "name":            "TimeUser",
+      "description":     "Produktionsmedarbejder",
+      "scope-references": ["$XSAPPNAME.TimeUser"]
+    },
+    {
+      "name":            "TimeAdmin",
+      "description":     "Tidsregistreringsadministrator",
+      "scope-references": ["$XSAPPNAME.TimeAdmin", "$XSAPPNAME.TimeUser"]
+    }
+  ],
+  "role-collections": [
+    {
+      "name":        "TimeRegistration_User",
+      "description": "Adgang til kiosk-app",
+      "role-template-references": ["$XSAPPNAME.TimeUser"]
+    },
+    {
+      "name":        "TimeRegistration_Admin",
+      "description": "Admin-adgang",
+      "role-template-references": ["$XSAPPNAME.TimeAdmin"]
+    }
+  ],
+  "oauth2-configuration": {
+    "token-validity":          43200,
+    "refresh-token-validity":  86400,
+    "redirect-uris": [
+      "https://*.hana.ondemand.com/**",
+      "http://localhost:4004/**"
+    ]
+  }
+}

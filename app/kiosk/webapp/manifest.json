@@ -1,0 +1,92 @@
+{
+  "_version": "1.65.0",
+  "sap.app": {
+    "id": "com.timeregistration.kiosk",
+    "type": "application",
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "applicationVersion": { "version": "1.0.0" },
+    "dataSources": {
+      "TimeService": {
+        "uri": "/api/time/",
+        "type": "OData",
+        "settings": { "odataVersion": "4.0" }
+      }
+    },
+    "i18n": "i18n/i18n.properties"
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon":         "sap-icon://time-entry-request",
+      "favIcon":      "",
+      "phone":        "",
+      "phone@2":      "",
+      "tablet":       "",
+      "tablet@2":     ""
+    },
+    "deviceTypes": { "desktop": true, "tablet": true, "phone": false },
+    "fullWidth": true
+  },
+  "sap.ui5": {
+    "rootView": {
+      "viewName": "com.timeregistration.kiosk.view.App",
+      "type":     "XML",
+      "async":    true,
+      "id":       "app"
+    },
+    "dependencies": {
+      "minUI5Version": "1.120.0",
+      "libs": {
+        "sap.ui.core":    {},
+        "sap.m":          {},
+        "sap.f":          {},
+        "sap.ui.layout":  {}
+      }
+    },
+    "contentDensities": { "compact": false, "cozy": true },
+    "models": {
+      "i18n": {
+        "type":     "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName":           "com.timeregistration.kiosk.i18n.i18n",
+          "supportedLocales":     ["", "da"],
+          "fallbackLocale":       "da"
+        }
+      },
+      "session": {
+        "type": "sap.ui.model.json.JSONModel",
+        "settings": {
+          "data": {
+            "sessionId":  null,
+            "employeeID": null,
+            "fullName":   null,
+            "costCenter": null,
+            "entryId":    null,
+            "entryType":  null,
+            "startTime":  null,
+            "running":    false
+          }
+        }
+      }
+    },
+    "routing": {
+      "config": {
+        "routerClass":  "sap.m.routing.Router",
+        "viewType":     "XML",
+        "viewPath":     "com.timeregistration.kiosk.view",
+        "controlId":    "navContainer",
+        "controlAggregation": "pages",
+        "async":        true
+      },
+      "routes": [
+        { "name": "Idle",      "pattern": "",        "target": "Idle"      },
+        { "name": "TimeEntry", "pattern": "entry",   "target": "TimeEntry" }
+      ],
+      "targets": {
+        "Idle":      { "viewName": "Idle",      "viewLevel": 1 },
+        "TimeEntry": { "viewName": "TimeEntry", "viewLevel": 2 }
+      }
+    }
+  }
+}

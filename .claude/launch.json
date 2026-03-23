@@ -1,0 +1,15 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "CAP Backend + UI5 (cds watch)",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "watch"],
+      "port": 4004,
+      "cwd": "/d/BTP/time-registration",
+      "env": {
+        "S4_MOCK": "true"
+      }
+    }
+  ]
+}

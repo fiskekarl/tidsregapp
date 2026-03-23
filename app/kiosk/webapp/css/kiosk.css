@@ -1,0 +1,71 @@
+/* ============================================================
+   Kiosk — Kiosk-specifikt CSS oven på SAP Horizon-temaet.
+   Undgå at overskrive Horizons farver, fonte eller komponenter.
+   ============================================================ */
+
+/* ── Grundlayout ───────────────────────────────────────────── */
+html, body { height: 100%; overflow: hidden; }
+
+/* ── Ur (idle-skærm) ───────────────────────────────────────── */
+.kioskClock .sapMTitle {
+  font-size: 4rem !important;
+  font-weight: 300 !important;
+  letter-spacing: 6px !important;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── RFID-card ─────────────────────────────────────────────── */
+.rfidCard {
+  border: 2px dashed var(--sapNeutralBorderColor, #bbb);
+  border-radius: 1rem;
+  padding: 2rem 3rem;
+  margin: 1rem auto;
+  max-width: 420px;
+  text-align: center;
+  background: var(--sapNeutralBackground, #f5f5f5);
+}
+
+/* ── RFID-prompt tekst ─────────────────────────────────────── */
+.kioskPrompt {
+  font-size: 1rem;
+}
+
+/* ── "eller"-separator ─────────────────────────────────────── */
+.kioskOr {
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* ── Touch-venlige knapper ─────────────────────────────────── */
+.kioskButton .sapMBtnInner {
+  height: 3rem !important;
+  font-size: 1rem !important;
+  min-width: 8rem !important;
+}
+
+.kioskActionBtn .sapMBtnInner {
+  height: 4.5rem !important;
+  font-size: 1.2rem !important;
+  min-width: 11rem !important;
+  font-weight: 600 !important;
+}
+
+/* ── Elapsed timer ─────────────────────────────────────────── */
+.kioskElapsed .sapMTitle {
+  font-size: 2.5rem !important;
+  font-weight: 300 !important;
+  letter-spacing: 4px !important;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Auto-logout countdown ─────────────────────────────────── */
+.kioskCountdown {
+  font-variant-numeric: tabular-nums;
+  font-size: 0.9rem !important;
+}
+
+/* ── Footer-tekst ──────────────────────────────────────────── */
+.kioskFooterText {
+  font-size: 0.78rem !important;
+}

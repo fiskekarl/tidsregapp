@@ -1,0 +1,19 @@
+{
+  "welcomeFile": "/kiosk/index.html",
+  "authenticationMethod": "route",
+  "routes": [
+    {
+      "source":      "^/api/(.*)$",
+      "target":      "/api/$1",
+      "destination": "srv-api",
+      "authenticationType": "xsuaa",
+      "csrfProtection": true
+    },
+    {
+      "source":      "^/kiosk/(.*)$",
+      "target":      "/webapp/$1",
+      "localDir":    "../kiosk",
+      "authenticationType": "xsuaa"
+    }
+  ]
+}

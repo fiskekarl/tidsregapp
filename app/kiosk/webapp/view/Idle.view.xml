@@ -1,0 +1,101 @@
+<mvc:View
+  controllerName="com.timeregistration.kiosk.controller.Idle"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core"
+  displayBlock="true">
+
+  <Page showHeader="false" backgroundDesign="Transparent">
+    <customHeader>
+      <Bar>
+        <contentRight>
+          <SegmentedButton id="langToggle" selectionChange=".onLanguageChange">
+            <items>
+              <SegmentedButtonItem key="da" text="DA" />
+              <SegmentedButtonItem key="en" text="EN" />
+            </items>
+          </SegmentedButton>
+        </contentRight>
+      </Bar>
+    </customHeader>
+
+    <content>
+      <VBox width="100%" alignItems="Center" class="sapUiLargeMarginTop">
+
+        <!-- Titel -->
+        <Title
+          text="{i18n>idleTitle}"
+          level="H1"
+          titleStyle="H1"
+          textAlign="Center"
+          width="100%"
+          class="kioskTitle sapUiSmallMarginBottom" />
+
+        <!-- Ur -->
+        <Title
+          id="clockDisplay"
+          text="00:00:00"
+          level="H2"
+          titleStyle="H2"
+          textAlign="Center"
+          width="100%"
+          class="kioskClock sapUiMediumMarginBottom" />
+
+        <!-- RFID-kort -->
+        <VBox class="rfidCard sapUiMediumMarginBottom" alignItems="Center">
+          <FlexBox justifyContent="Center" class="sapUiSmallMarginBottom">
+            <core:Icon src="sap-icon://rfid" size="4rem" color="#2f81f7" />
+          </FlexBox>
+          <Text
+            text="{i18n>rfidPrompt}"
+            textAlign="Center"
+            class="kioskPrompt" />
+        </VBox>
+
+        <!-- Separator -->
+        <Text
+          text="── {i18n>orLabel} ──"
+          textAlign="Center"
+          width="100%"
+          class="kioskOr sapUiSmallMarginBottom" />
+
+        <!-- Manuel indtastning -->
+        <FlexBox justifyContent="Center" width="100%" class="sapUiSmallMarginBottom">
+          <Input
+            id="manualInput"
+            placeholder="{i18n>manualInputPlaceholder}"
+            width="18rem"
+            submit=".onManualLogin"
+            liveChange=".onManualInputChange"
+            class="kioskInput" />
+          <Button
+            text="{i18n>loginButton}"
+            type="Emphasized"
+            press=".onManualLogin"
+            class="sapUiSmallMarginBegin kioskButton" />
+        </FlexBox>
+
+        <!-- Fejlbesked -->
+        <VBox width="26rem" alignItems="Stretch">
+          <MessageStrip
+            id="errorStrip"
+            text=""
+            type="Error"
+            showIcon="true"
+            visible="false"
+            class="sapUiSmallMarginTop" />
+        </VBox>
+
+      </VBox>
+    </content>
+
+    <footer>
+      <Bar>
+        <contentMiddle>
+          <Text text="{i18n>kioskFooter}" class="kioskFooterText" />
+        </contentMiddle>
+      </Bar>
+    </footer>
+  </Page>
+
+</mvc:View>

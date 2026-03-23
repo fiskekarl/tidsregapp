@@ -1,0 +1,6 @@
+EmployeeID,RfidToken,FullName,CostCenter,IsActive
+10001,0006543210,Lars Jensen,4100,true
+10002,0009876543,Maria Nielsen,4100,true
+10003,0001234567,Søren Pedersen,4200,true
+10004,0007654321,Anne Christensen,4200,true
+10005,0005551234,Peter Hansen,4300,true
